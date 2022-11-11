@@ -4,10 +4,15 @@ app.use(express.urlencoded({
   extended: true
 }))
 
+const MongoClient = require('mongodb').MongoClient;
+MongoClient.connect('mongodb+srv://hojae:<ksybym486>@cluster0.ztdvnuk.mongodb.net/?retryWrites=true&w=majority', () => {
 
-app.listen(8080, function () {
-  console.log('listening on 8080');
+  app.listen(8080, function () {
+    console.log('listening on 8080');
+  });
+
 });
+
 
 app.get('/pet', function (req, res) {
   res.send('hello')
