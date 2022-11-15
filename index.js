@@ -6,6 +6,7 @@ app.use(express.urlencoded({
 i = 1;
 var db;
 const MongoClient = require('mongodb').MongoClient;
+app.set('view engine', 'ejs')
 MongoClient.connect('mongodb+srv://hojae:ksybym486@cluster0.ztdvnuk.mongodb.net/?retryWrites=true&w=majority', function (err, client) {
   //연결되면 할 일
   if (err) {
@@ -58,3 +59,8 @@ app.post('/add', (req, res) => {
 
   i += 1;
 });
+
+
+app.get('/list', (req, res) => {
+  res.render('list.ejs');
+})
