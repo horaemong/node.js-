@@ -62,5 +62,13 @@ app.post('/add', (req, res) => {
 
 
 app.get('/list', (req, res) => {
-  res.render('list.ejs');
+
+  db.collection('post').find().toArray((err, result) => {
+    console.log(result);
+    res.render('list.ejs', {
+      posts: result
+    });
+  });
+
+
 })
