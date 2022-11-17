@@ -3,7 +3,8 @@ const app = express();
 app.use(express.urlencoded({
   extended: true
 }))
-i = 1;
+var total_post = 0;
+
 var db;
 const MongoClient = require('mongodb').MongoClient;
 app.set('view engine', 'ejs')
@@ -49,15 +50,19 @@ app.post('/add', (req, res) => {
   console.log(req.body.title);
   console.log(req.body.date);
 
+  db.collection('counter').findOne({
+    name: '게시물갯수'
+  }, (err, result) => {
+    total_post = result.totalPost;
+  });
   db.collection('post').insertOne({
-    _id: i,
+    _id: total_post + 1,
     제목: req.body.title,
     날짜: req.body.date
   }, (err, res) => {
     console.log('저장 완료');
   });
 
-  i += 1;
 });
 
 
